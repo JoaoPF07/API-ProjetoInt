@@ -1,35 +1,47 @@
-
 export class EntidadeEntity {
-    id: string;
-    nome: string;
-    endereco: string;
-    telefone: string;
-    email: string;
-    #senha: string;
+  id: string;
+  email: string;
+  #senha: string;
+  nome: string;
+  telefone: string;
+  cnpj: string;
+  endereco: string;
+  complemento: string;
+  cidade: string;
+  estado: string;
+  cep: string;
 
-    constructor (
-        id: string,
-    nome: string,
-    endereco: string,
-    telefone: string,
+  constructor(
+    id: string,
     email: string,
     senha: string,
-    ) {
-        this.id = id;
-        this.nome = nome;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.email = email;
-        this.#senha = senha;
+    nome: string,
+    telefone: string,
+    cnpj: string,
+    endereco: string,
+    complemento: string,
+    cidade: string,
+    estado: string,
+    cep: string,
+  ) {
+    this.id = id;
+    this.email = email;
+    this.#senha = senha;
+    this.nome = nome;
+    this.telefone = telefone;
+    this.cnpj = cnpj;
+    this.endereco = endereco;
+    this.complemento = complemento;
+    this.cidade = cidade;
+    this.estado = estado;
+    this.cep = cep;
+  }
 
-    }
+  get senha() {
+    return '********';
+  }
 
-    get senha (){
-        return '********'
-    }
-
-    set senha (senhaNova){
-        this.#senha = senhaNova;
-    }
-
+  set senha(senhaNova) {
+    this.#senha = senhaNova;
+  }
 }
