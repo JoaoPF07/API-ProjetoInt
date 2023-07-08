@@ -44,7 +44,15 @@ export class EntidadeController {
     );
 
     var retornoEntidade;
-  }
+
+    this.clsEntidadesArmazenadas.AdicionarEntidade(entidade);
+        retornoEntidade={
+            id: entidade.id,
+            message:"Entidade Criada!"
+            }
+
+            return retornoEntidade;
+    }
 
   @Put('/:id')
   async atualizaEntidade(
@@ -60,13 +68,13 @@ export class EntidadeController {
   }
 
   @Delete('/:id')
-  async removeEntidade(@Param('id') id: string) {
-    const entidadeRemovida = await this.clsEntidadesArmazenadas.removeEntidade(
+  async deleteEntidade(@Param('id') id: string) {
+    const entidadeDeletada = await this.clsEntidadesArmazenadas.deleteEntidade(
       id,
     );
     return {
-      entidade: entidadeRemovida,
-      message: 'Entidade Removida',
+      entidade: entidadeDeletada,
+      message: 'Entidade Deletada',
     };
   }
 }

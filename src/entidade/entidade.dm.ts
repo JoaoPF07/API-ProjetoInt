@@ -40,7 +40,7 @@ export class EntidadesAmazenadas {
     return entidade;
   }
 
-  async removeEntidade(id: string) {
+  async deleteEntidade(id: string) {
     const entidade = this.buscaPorID(id);
     this.#entidades = this.#entidades.filter(
       (entidadeSalva) => entidadeSalva.id !== id,

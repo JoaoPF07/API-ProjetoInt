@@ -1,4 +1,5 @@
 import { MinLength, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { EmailUnico } from '../validacao/email-unico.validator';
 
 export class criaEntidadeDTO {
     
@@ -31,6 +32,6 @@ export class criaEntidadeDTO {
   @IsString({ message: 'O estado digitado é inválido!' })
   estado: string;
 
-  @IsEmail({ message: 'CEP inválido!' })
+  @IsString({ message: 'CEP inválido!' })
   cep: string;
 }
