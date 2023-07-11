@@ -1,10 +1,8 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { EntidadeEntity } from './entidade/entidade.entity';
+import { EntidadeModule } from './entidade/entidade.module';
 
 @Module({
-  imports: [EntidadeEntity],
+  imports: [EntidadeModule],
   controllers: [],
   providers: [],
 })
