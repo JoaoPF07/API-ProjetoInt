@@ -27,8 +27,9 @@ export class EntidadeController {
     return listaRetorno;
   }
 
-  @Post()
+  @Post ()
   async criaEntidade(@Body() dadosEntidade: criaEntidadeDTO) {
+
     var entidade = new EntidadeEntity(
       uuid(),
       dadosEntidade.email,
@@ -40,8 +41,7 @@ export class EntidadeController {
       dadosEntidade.complemento,
       dadosEntidade.cidade,
       dadosEntidade.estado,
-      dadosEntidade.cep,
-    );
+      dadosEntidade.cep);
 
     var retornoEntidade;
 
@@ -52,7 +52,7 @@ export class EntidadeController {
             }
 
             return retornoEntidade;
-    }
+    };
 
   @Put('/:id')
   async atualizaEntidade(
