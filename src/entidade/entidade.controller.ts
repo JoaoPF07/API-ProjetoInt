@@ -22,16 +22,24 @@ export class EntidadeController {
   async RetornoEntidades() {
     const entidadesListadas = await this.clsEntidadesArmazenadas.Entidades;
     const listaRetorno = entidadesListadas.map(
-      (entidade) => new listaEntidadeDTO(entidade.id, entidade.nome),
+      (entidade) =>
+        new listaEntidadeDTO(
+          entidade.nome,
+          entidade.cidade,
+          entidade.estado,
+          entidade.cep,
+          entidade.telefone,
+          entidade.endereco,
+        ),
     );
     return listaRetorno;
   }
 
-  @Post ()
+  @Post()
   async criaEntidade(@Body() dadosEntidade: criaEntidadeDTO) {
-
     var entidade = new EntidadeEntity(
       uuid(),
+      dadosEntidade.img,
       dadosEntidade.email,
       dadosEntidade.senha,
       dadosEntidade.nome,
@@ -41,18 +49,19 @@ export class EntidadeController {
       dadosEntidade.complemento,
       dadosEntidade.cidade,
       dadosEntidade.estado,
-      dadosEntidade.cep);
+      dadosEntidade.cep,
+    );
 
     var retornoEntidade;
 
     this.clsEntidadesArmazenadas.AdicionarEntidade(entidade);
-        retornoEntidade={
-            id: entidade.id,
-            message:"Entidade Criada!"
-            }
-
-            return retornoEntidade;
+    retornoEntidade = {
+      id: entidade.id,
+      message: 'Entidade Criada!',
     };
+
+    return retornoEntidade;
+  }
 
   @Put('/:id')
   async atualizaEntidade(

@@ -3,6 +3,10 @@ import { EmailUnico } from '../validacao/email-unico.validator';
 
 export class AlterarEntidadeDTO {
     
+  @IsString()
+  @IsOptional ()
+  img: string;
+
   @IsEmail(undefined, { message: 'Email inválido!' })
   @EmailUnico({ message: 'Já existe uma entidade com este email' })
   @IsOptional ()

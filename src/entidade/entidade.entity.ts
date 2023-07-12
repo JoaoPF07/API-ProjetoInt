@@ -1,5 +1,6 @@
 export class EntidadeEntity {
   id: string;
+  img: string;
   email: string;
   #senha: string;
   nome: string;
@@ -13,6 +14,7 @@ export class EntidadeEntity {
 
   constructor(
     id: string,
+    img: string,
     email: string,
     senha: string,
     nome: string,
@@ -25,6 +27,7 @@ export class EntidadeEntity {
     cep: string,
   ) {
     this.id = id;
+    this.img = img;
     this.email = email;
     this.#senha = senha;
     this.nome = nome;
