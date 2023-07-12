@@ -4,8 +4,7 @@ import { EmailUnico } from '../validacao/email-unico.validator';
 export class criaEntidadeDTO {
     
 
-  @IsString()
-  img: string;
+  
 
   @IsEmail(undefined, { message: 'Email inválido!' })
   @EmailUnico({ message: 'Já existe uma entidade com este email' })

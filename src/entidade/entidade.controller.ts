@@ -39,7 +39,7 @@ export class EntidadeController {
   async criaEntidade(@Body() dadosEntidade: criaEntidadeDTO) {
     var entidade = new EntidadeEntity(
       uuid(),
-      dadosEntidade.img,
+     
       dadosEntidade.email,
       dadosEntidade.senha,
       dadosEntidade.nome,
