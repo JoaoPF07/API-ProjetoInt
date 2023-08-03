@@ -1,15 +1,19 @@
-import { Module } from "@nestjs/common";
-import { EntidadeController } from "./entidade.controller";
-import { EntidadesAmazenadas } from "./entidade.dm";
-import { EmailUnicoValidator } from "./validacao/email-unico.validator";
-
+import { Module } from '@nestjs/common';
+import { DatabaseModule } from 'src/database/database.module';
+import { EntidadeController } from './entidade.controller';
+import { EntidadesAmazenadas } from './entidade.dm';
+import { entidadeProviders } from './entidade.providers';
+import { EntidadeService } from './entidade.service';
+import { EmailUnicoValidator } from './validacao/email-unico.validator';
 
 @Module({
-    controllers:[EntidadeController],
-    providers: [EntidadesAmazenadas, EmailUnicoValidator],
-
+  imports: [DatabaseModule],
+  controllers: [EntidadeController],
+  providers: [
+    EntidadesAmazenadas,
+    EmailUnicoValidator,
+    ...entidadeProviders,
+    EntidadeService,
+  ],
 })
-
-export class EntidadeModule{
-    
-}
+export class EntidadeModule {}
