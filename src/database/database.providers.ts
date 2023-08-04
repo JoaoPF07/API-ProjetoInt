@@ -8,9 +8,9 @@ export const databaseProviders = [
         type: 'mysql',
         host: 'db4free.net',
         port: 3306,
-        username: 'projetoint',
-        password: 'ProjetoINT@',
-        database: 'projetoint',
+        username: 'projetoapi',
+        password: 'ProjetoAPI@',
+        database: 'projetoapi',
         entities: [
             __dirname + '/../**/*.entity{.ts,.js}',
         ],

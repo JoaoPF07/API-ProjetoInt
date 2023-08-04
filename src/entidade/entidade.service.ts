@@ -5,7 +5,7 @@ import { EntidadeEntity } from './entidade.entity';
 @Injectable()
 export class EntidadeService {
   constructor(
-    @Inject('MARCA_REPOSITORY')
+    @Inject('ENTIDADE_REPOSITORY')
     private entidadeRepository: Repository<EntidadeEntity>,
   ) {}
 
