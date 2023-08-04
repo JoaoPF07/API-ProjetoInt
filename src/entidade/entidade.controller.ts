@@ -56,7 +56,7 @@ export class EntidadeController {
 
     this.clsEntidadesArmazenadas.AdicionarEntidade(entidade);
     retornoEntidade = {
-      id: entidade.id,
+      id: entidade.ID,
       message: 'Entidade Criada!',
     };
 

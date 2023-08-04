@@ -19,7 +19,7 @@ export class EntidadesAmazenadas {
   }
   private buscaPorID(id: string) {
     const possivelEntidade = this.#entidades.find(
-      (entidadeSalva) => entidadeSalva.id === id,
+      (entidadeSalva) => entidadeSalva.ID === id,
     );
     if (!possivelEntidade) {
       throw new Error('Entidade não encontrada!!');
@@ -43,7 +43,7 @@ export class EntidadesAmazenadas {
   async deleteEntidade(id: string) {
     const entidade = this.buscaPorID(id);
     this.#entidades = this.#entidades.filter(
-      (entidadeSalva) => entidadeSalva.id !== id,
+      (entidadeSalva) => entidadeSalva.ID !== id,
     );
     return entidade;
   }
