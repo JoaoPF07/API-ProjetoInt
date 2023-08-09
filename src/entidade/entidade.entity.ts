@@ -1,47 +1,36 @@
-export class EntidadeEntity {
+import { Column, Entity, PrimaryColumn } from 'typeorm';
+
+@Entity()
+export class ENTIDADE {
+  @PrimaryColumn()
   ID: string;
+
+  @Column()
   email: string;
-  #senha: string;
+
+  @Column()
+  senha: string;
+
+  @Column()
   nome: string;
+
+  @Column()
   telefone: string;
+
+  @Column()
   cnpj: string;
+  @Column()
   endereco: string;
+
+  @Column()
   complemento: string;
+
+  @Column()
   cidade: string;
+
+  @Column()
   estado: string;
+
+  @Column()
   cep: string;
-
-  constructor(
-    ID: string,
-    email: string,
-    senha: string,
-    nome: string,
-    telefone: string,
-    cnpj: string,
-    endereco: string,
-    complemento: string,
-    cidade: string,
-    estado: string,
-    cep: string,
-  ) {
-    this.ID = ID;
-    this.email = email;
-    this.#senha = senha;
-    this.nome = nome;
-    this.telefone = telefone;
-    this.cnpj = cnpj;
-    this.endereco = endereco;
-    this.complemento = complemento;
-    this.cidade = cidade;
-    this.estado = estado;
-    this.cep = cep;
-  }
-
-  get senha() {
-    return '********';
-  }
-
-  set senha(senhaNova) {
-    this.#senha = senhaNova;
-  }
 }
