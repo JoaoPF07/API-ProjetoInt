@@ -10,71 +10,38 @@ import {
 import { criaEntidadeDTO } from './dto/entidade.dto';
 import { listaEntidadeDTO } from './dto/listaEntidade.dto';
 import { EntidadesAmazenadas } from './entidade.dm';
-import { EntidadeEntity } from './entidade.entity';
-import { v4 as uuid } from 'uuid';
 import { AlterarEntidadeDTO } from './dto/atualizaEntidade.dto';
+import { RetornoCadastroDTO } from 'src/dto/retorno.dto';
+import { EntidadeService } from './entidade.service';
+import { ENTIDADE } from './entidade.entity';
+
 
 @Controller('/entidades')
 export class EntidadeController {
-  constructor(private clsEntidadesArmazenadas: EntidadesAmazenadas) {}
+  constructor(private readonly entidadeService: EntidadeService){ }
 
-  @Get()
-  async RetornoEntidades() {
-    const entidadesListadas = await this.clsEntidadesArmazenadas.Entidades;
-    const listaRetorno = entidadesListadas.map(
-      (entidade) =>
-        new listaEntidadeDTO(
-          entidade.nome,
-          entidade.cidade,
-          entidade.estado,
-          entidade.cep,
-          entidade.telefone,
-          entidade.endereco,
-        ),
-    );
-    return listaRetorno;
+  @Get('listar')
+
+  async listar(): Promise<ENTIDADE[]>{
+      return this.entidadeService.listar();
+
   }
 
-  @Post()
-  async criaEntidade(@Body() dadosEntidade: criaEntidadeDTO) {
-    var entidade = new EntidadeEntity(
-      uuid(),
-     
-      dadosEntidade.email,
-      dadosEntidade.senha,
-      dadosEntidade.nome,
-      dadosEntidade.telefone,
-      dadosEntidade.cnpj,
-      dadosEntidade.endereco,
-      dadosEntidade.complemento,
-      dadosEntidade.cidade,
-      dadosEntidade.estado,
-      dadosEntidade.cep,
-    );
-
-    var retornoEntidade;
-
-    this.clsEntidadesArmazenadas.AdicionarEntidade(entidade);
-    retornoEntidade = {
-      id: entidade.ID,
-      message: 'Entidade Criada!',
-    };
-
-    return retornoEntidade;
+  
+  @Post ('')
+  async criaEntidade (@Body () dadosEntidade: criaEntidadeDTO): Promise<RetornoCadastroDTO> {
+    return this.entidadeService.inserir(dadosEntidade)
   }
 
-  @Put('/:id')
-  async atualizaEntidade(
-    @Param('id') id: string,
-    @Body() novosDados: Partial<AlterarEntidadeDTO>,
-  ) {
-    const entidadeAtualizada =
-      await this.clsEntidadesArmazenadas.atualizaEntidade(id, novosDados);
-    return {
-      entidade: entidadeAtualizada,
-      message: 'Entidade Atualizada',
-    };
-  }
+  @Get('ID:id')
+
+    async listarID(@Param('id') id:string): Promise<ENTIDADE>{
+        return this.entidadeService.localizarID(id);
+
+    }
+    @Put (':id')
+      async alterarEntidade(@Body() dados: criaEntidadeDTO, @Param)
+    
 
   @Delete('/:id')
   async deleteEntidade(@Param('id') id: string) {
@@ -86,4 +53,5 @@ export class EntidadeController {
       message: 'Entidade Deletada',
     };
   }
+
 }
