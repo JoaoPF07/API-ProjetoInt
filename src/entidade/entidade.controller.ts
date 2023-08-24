@@ -8,17 +8,16 @@ import {
   Put,
 } from '@nestjs/common';
 import { criaEntidadeDTO } from './dto/entidade.dto';
-import { listaEntidadeDTO } from './dto/listaEntidade.dto';
-import { EntidadesAmazenadas } from './entidade.dm';
-import { AlterarEntidadeDTO } from './dto/atualizaEntidade.dto';
-import { RetornoCadastroDTO } from 'src/dto/retorno.dto';
+import { RetornoCadastroDTO, RetornoObjDTO } from 'src/dto/retorno.dto';
 import { EntidadeService } from './entidade.service';
 import { ENTIDADE } from './entidade.entity';
 
 
 @Controller('/entidades')
 export class EntidadeController {
-  constructor(private readonly entidadeService: EntidadeService){ }
+  constructor(private readonly entidadeService: EntidadeService){ 
+
+  }
 
   @Get('listar')
 
@@ -40,18 +39,16 @@ export class EntidadeController {
 
     }
     @Put (':id')
-      async alterarEntidade(@Body() dados: criaEntidadeDTO, @Param)
+      async alterarEntidade(@Body() dados: criaEntidadeDTO, @Param ("id") id: string): Promise<RetornoCadastroDTO>{
+        return this.entidadeService.alterar(id,dados)
+      }
     
 
-  @Delete('/:id')
-  async deleteEntidade(@Param('id') id: string) {
-    const entidadeDeletada = await this.clsEntidadesArmazenadas.deleteEntidade(
-      id,
-    );
-    return {
-      entidade: entidadeDeletada,
-      message: 'Entidade Deletada',
-    };
+      @Delete('remove-:id')
+    async removeMarca(@Param('id') id: string): Promise<RetornoObjDTO>{
+        return this.entidadeService.remover(id);
+    }
+
   }
 
-}
+

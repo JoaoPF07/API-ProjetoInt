@@ -15,35 +15,36 @@ export class EntidadeService {
   async listar(): Promise<ENTIDADE[]> {
     return this.entidadeRepository.find();
   }
+  
+    async validaEmail(email: string) {
+      const entidade = await this.entidadeRepository.findOne ({
+        where: {
+          email,
+        },
+      })
 
-  async inserir(dados: criaEntidadeDTO): Promise<RetornoCadastroDTO> {
-    let Entidade = new ENTIDADE();
-    Entidade.ID = uuid();
-    Entidade.email = dados.email;
-    Entidade.senha = dados.senha;
-    Entidade.nome = dados.nome;
-    Entidade.telefone = dados.telefone;
-    Entidade.cnpj = dados.cnpj;
-    Entidade.endereco = dados.endereco;
-    Entidade.complemento = dados.complemento;
-    Entidade.cidade = dados.cidade;
-    Entidade.estado = dados.estado;
-    Entidade.cep = dados.cep;
+      return entidade !== null;
+    }
+
+  async inserir(dados: criaEntidadeDTO): Promise<RetornoCadastroDTO>{
+    let entidade = new ENTIDADE();
+    entidade.ID = uuid();
+    entidade.nome = dados.nome;
 
     return this.entidadeRepository
-      .save(Entidade)
-      .then((result) => {
-        return <RetornoCadastroDTO>{
-          id: Entidade.ID,
-          message: 'Entidade cadastrada!',
-        };
-      })
-      .catch((error) => {
-        return <RetornoCadastroDTO>{
-          id: '',
-          message: 'Houve um erro no cadastro',
-        };
-      });
+    .save (entidade)
+    .then((result) => {
+      return <RetornoCadastroDTO> {
+        id: entidade.ID,
+        message: "Entidade Cadastrada!",
+      };
+    })
+    .catch ((error) => {
+      return <RetornoCadastroDTO> {
+        id: '',
+        message: 'Houve um erros ao se cadastrar.' + error.message,
+      };
+    });
   }
 
   localizarID(ID: string): Promise<ENTIDADE> {
@@ -73,10 +74,7 @@ export class EntidadeService {
       });
   }
 
-  async alterar(
-    id: string,
-    dados: criaEntidadeDTO,
-  ): Promise<RetornoCadastroDTO> {
+  async alterar(id: string, dados: criaEntidadeDTO): Promise<RetornoCadastroDTO> {
     const entidade = await this.localizarID(id);
 
     Object.entries(dados).forEach(([chave, valor]) => {

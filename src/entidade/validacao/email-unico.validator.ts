@@ -1,4 +1,3 @@
-import { EntidadesAmazenadas } from '../entidade.dm';
 import {
   registerDecorator,
   ValidationArguments,
@@ -7,17 +6,20 @@ import {
   ValidatorConstraintInterface,
 } from 'class-validator';
 import { Injectable } from '@nestjs/common';
+import { Repository } from 'typeorm';
+import { ENTIDADE } from '../entidade.entity';
+import { EntidadeService } from '../entidade.service';
 
 @Injectable()
 @ValidatorConstraint({ async: true })
 export class EmailUnicoValidator implements ValidatorConstraintInterface {
-  constructor(private clsEntidadesArmazenadas: EntidadesAmazenadas) {}
+  constructor(private clsEntidadeArmazenada: EntidadeService) {}
 
   async validate(
     value: any,
     validationArguments?: ValidationArguments,
   ): Promise<boolean> {
-    const validarEmail = await this.clsEntidadesArmazenadas.validaEmail(value);
+    const validarEmail = await this.clsEntidadeArmazenada.validaEmail(value);
     return !validarEmail;
   }
 }
