@@ -29,7 +29,16 @@ export class EntidadeService {
   async inserir(dados: criaEntidadeDTO): Promise<RetornoCadastroDTO>{
     let entidade = new ENTIDADE();
     entidade.ID = uuid();
+    entidade.email = dados.email;
+    entidade.senha = dados.senha;
     entidade.nome = dados.nome;
+    entidade.telefone= dados.telefone;
+    entidade.cnpj= dados.cnpj;
+    entidade.endereco= dados.endereco;
+    entidade.complemento= dados.complemento;
+    entidade.cidade= dados.cidade;
+    entidade.estado= dados.estado;
+    entidade.cep= dados.cep;
 
     return this.entidadeRepository
     .save (entidade)
