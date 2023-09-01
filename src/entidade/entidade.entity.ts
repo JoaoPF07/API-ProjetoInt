@@ -19,6 +19,7 @@ export class ENTIDADE {
 
   @Column()
   cnpj: string;
+  
   @Column()
   endereco: string;
 
