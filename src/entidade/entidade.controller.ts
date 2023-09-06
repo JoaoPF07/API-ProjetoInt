@@ -32,7 +32,7 @@ export class EntidadeController {
     return this.entidadeService.inserir(dadosEntidade)
   }
 
-  @Get('ID:id')
+  @Get('ID/:id')
 
     async listarID(@Param('id') id:string): Promise<ENTIDADE>{
         return this.entidadeService.localizarID(id);
